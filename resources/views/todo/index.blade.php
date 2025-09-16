@@ -29,7 +29,13 @@
         {{ $todo->body }}
       </div>
       <div class="note-actions">
-        <div class="left"><i class="bi bi-trash me-1"></i>Delete</div>
+        <form class="left" action="{{ route('todo.destroy', $todo->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+          @csrf  
+          @method('DELETE')        
+          <button type="submit" class="btn">
+            <i class="bi bi-trash me-1"></i> Delete
+          </button>
+        </form>
         <div class="right">
           <a href="#"><i class="bi bi-pencil me-1"></i>Edit</a>
           <a href="#"><i class="bi bi-share me-1"></i>Share</a>

@@ -34,7 +34,7 @@ class AuthController extends Controller
             // session()->flash('toast', 'Login berhasil!');
 
             // //redirect route dashboard
-            // return redirect()->route('my.dashboard.index');
+            return redirect()->route('todo.index');
 
         }
 

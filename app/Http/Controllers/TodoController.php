@@ -10,7 +10,7 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $todos = Todo::where('user_id', Auth::user()->id)->get();
+        $todos = Todo::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
         // $todos = Todo::all();
         return view('todo.index',[
             'todos' => $todos,
@@ -23,5 +23,40 @@ class TodoController extends Controller
         return view('todo.create',[
             // 'todos' => $todos,
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $pesan = [
+            'title.required' => 'Title harus diisi',
+            'title.min' => 'Title minimal 3 karakter',
+            'body.required' => 'Body harus diisi',
+        ];
+
+        $request->validate([
+            'title' => 'required|min:3',
+            'body' => 'required',
+        ], $pesan);
+
+        // $todo = new Todo();
+        // $todo->title = $request->title;
+        // $todo->body = $request->body;
+        // $todo->user_id = Auth::user()->id;
+        // $todo->save();
+
+        Todo::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'user_id' => Auth::user()->id,
+        ]);
+
+        return redirect()->route('todo.index');
+    }
+
+    public function destroy($id)
+    {
+        $todo = Todo::findOrFail($id);
+        $todo->delete();
+        return redirect()->route('todo.index');
     }
 }

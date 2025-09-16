@@ -19,7 +19,7 @@
 
       <div class="mb-3">
         <label class="form-label fw-semibold">Note</label>
-        <textarea name="body" class="form-control" rows="5" placeholder="Write your note here...">{{ old('body') }}</textarea>
+        <textarea id="body-content" name="body" class="form-control" rows="5" placeholder="Write your note here...">{{ old('body') }}</textarea>
         @error('body')
         <div class="alert alert-danger mt-2">{{ $message }}</div>
         @enderror
@@ -29,5 +29,12 @@
     </div>
   </form>
 </div>
+@endsection
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.11.1/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace('body-content');
+</script>
 @endsection
 

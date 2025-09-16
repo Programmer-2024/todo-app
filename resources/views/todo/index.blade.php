@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="mb-3">
-        {{ $todo->body }}
+        {!! $todo->body !!}
       </div>
       <div class="note-actions">
         <form class="left" action="{{ route('todo.destroy', $todo->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">

@@ -78,7 +78,7 @@ class TodoController extends Controller
         $todo->title = $request->title;
         $todo->body = $request->body;
         $todo->save();
-        
+
         return redirect()->route('todo.index');
     }
 

@@ -37,7 +37,7 @@
           </button>
         </form>
         <div class="right">
-          <a href="#"><i class="bi bi-pencil me-1"></i>Edit</a>
+          <a href="{{ route('todo.edit', $todo->id) }}"><i class="bi bi-pencil me-1"></i>Edit</a>
           <a href="#"><i class="bi bi-share me-1"></i>Share</a>
         </div>
       </div>
@@ -50,4 +50,10 @@
   @endforelse
 
 </div>
+@endsection
+
+@section('js')
+<script>
+//  alert('Selamat Datang');
+</script>
 @endsection

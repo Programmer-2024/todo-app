@@ -53,6 +53,35 @@ class TodoController extends Controller
         return redirect()->route('todo.index');
     }
 
+    public function edit($id)
+    {
+        $todo = Todo::findOrFail($id);
+        return view('todo.edit',[
+            'todo' => $todo,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $pesan = [
+            'title.required' => 'Title harus diisi',
+            'title.min' => 'Title minimal 3 karakter',
+            'body.required' => 'Body harus diisi',
+        ];
+
+        $request->validate([
+            'title' => 'required|min:3',
+            'body' => 'required',
+        ], $pesan);
+
+        $todo = Todo::findOrFail($id);
+        $todo->title = $request->title;
+        $todo->body = $request->body;
+        $todo->save();
+        
+        return redirect()->route('todo.index');
+    }
+
     public function destroy($id)
     {
         $todo = Todo::findOrFail($id);
